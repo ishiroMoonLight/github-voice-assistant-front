@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 265 40% 12%;
+  /* Midnight Purple - Dark but colorful */
+  --foreground: 0 0% 100%;
+  /* Pure White */
+  --card: 265 40% 16%;
+  --card-foreground: 0 0% 100%;
+  /* White */
+  --popover: 265 40% 12%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 270 100% 65%;
+  /* Vibrant Purple */
+  --primary-foreground: 0 0% 0%;
+  --secondary: 300 100% 60%;
+  /* Magenta */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 250 100% 75%;
+  /* Soft Lavender */
+  --accent-foreground: 265 40% 12%;
+  --muted: 265 40% 20%;
+  --muted-foreground: 265 10% 85%;
+  /* Bright Gray */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 265 40% 25%;
+  --input: 265 40% 25%;
+  --ring: 270 100% 65%;
+  --radius: 1rem;
+}
+
+.dark {
+  --background: 270 50% 2%;
+  --card: 270 50% 6%;
+  --primary: 270 100% 50%;
+  --secondary: 300 100% 40%;
+  --border: 270 50% 10%;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(at 0% 0%, hsla(270, 100%, 65%, 0.25) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(300, 100%, 60%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, hsla(250, 100%, 75%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(270, 100%, 60%, 0.1) 0px, transparent 50%);
+    background-attachment: fixed;
+    background-color: hsl(265, 40%, 12%) !important;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-background/40 backdrop-blur-xl border border-white/10;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-xl border border-white/5 shadow-2xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-primary via-secondary to-accent;
+  }
+}
+
+@keyframes pulse-soft {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s infinite linear;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 5s infinite ease-in-out;
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px -5px hsla(270, 100%, 65%, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px -5px hsla(300, 100%, 60%, 0.5);
+  }
+}
+
+.animate-glow {
+  animation: glow 4s infinite ease-in-out;
+}
